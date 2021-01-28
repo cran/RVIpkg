@@ -1,7 +1,7 @@
-#' @title test
+#' @title Simulated volumes of subcortical structures
 #'
 #' @description Simulated volumes of subcortical structures of Schizophrenia spectrum disorder are used as an example for this function.
-#' You can calculate RVI for this dataset"
+#' You can calculate RVI for this dataset
 #'
 #' @format A data frame with 196 rows and 12 variables:
 #' \describe{
@@ -18,5 +18,5 @@
 #'   \item{Amygdala}{simulated volumes of Amygdala}
 #'   \item{Left.Accumbens.area}{simulated volumes of left Accumbens}
 #' }
-#' @source The 'test' dataset is from Maryland Psychiatric Research Center, Department of Psychiatry, University of Maryland School of Medicine.
-"test"
+#' @source The 'data' dataset is from Maryland Psychiatric Research Center, Department of Psychiatry, University of Maryland School of Medicine.
+"data"

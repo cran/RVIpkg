@@ -4,21 +4,24 @@
 \alias{RVI_func}
 \title{Regional Vulnerability Index}
 \usage{
-RVI_func(ID, DXcontrol, covariates, resp.range, EP, data)
+RVI_func(ID, DXcontrol, covariates = NULL, resp.range, EP, data)
 }
 \arguments{
 \item{ID}{a column name of subject IDs in data.}
 
-\item{DXcontrol}{an character string specifying control subset(i.e. DXcontrol='DX==0'). Mean and standard deviation for
+\item{DXcontrol}{a character string specifying control subset(i.e. DXcontrol='DX==0'). Mean and standard deviation for
 z-normalization should be calculated in healthy controls.}
 
-\item{covariates}{an optional character vector specifying column names of covariates (i.e. Age, Sex). If covariates=NULL,
+\item{covariates}{an optional character vector specifying column names of covariates (i.e. Age, Sex). If covariates=NULL (the default),
 residuals will not be adjusted for covariates.
 If covariates are specified(i.e. covariates=c('Age','Sex')), residuals will be adjusted for covariates.}
 
-\item{resp.range}{a numeric vector specifying column range of responses}
+\item{resp.range}{a numeric vector specifying column range of regional neuroimaging traits.}
 
-\item{EP}{a numeric vector specifying an expected pattern of measurements.}
+\item{EP}{a numeric vector specifying an expected pattern of measurements. Expected patterns(EP.WM, EP.GM and EP.Subcortical) for
+WM, GM and Subcortical are included in the package(Note: If you use an expected pattern from the package, the order of regional neuroimaging
+traits need to match the corresponding order of the expected pattern). Check patterns(i.e. RVIpkg::EP.WM$SSD, RVIpkg::EP.WM$MDD, RVIpkg::EP.WM$AD
+EP.GM$SSD, RVIpkg::EP.GM$MDD, RVIpkg::EP.GM$AD, EP.Subcortical$SSD, RVIpkg::EP.Subcortical$MDD, RVIpkg::EP.Subcortical$AD.)}
 
 \item{data}{a data frame contains a column of subject IDs, a column of controls, columns of covariates, columns of responses.}
 }
@@ -26,7 +29,8 @@ If covariates are specified(i.e. covariates=c('Age','Sex')), residuals will be a
 A list with the following elements:
 \item{i.norm.resid}{inverse-normal transformed(INT) residuals}
 \item{z.norm.resid}{z-normalized INT residuals}
-\item{RVI}{pearson correlation coefficient between the z-normalized INT residuals of subjects and their expected pattern}
+\item{RVI.r}{pearson correlation coefficient between the z.norm.resid of subjects and their expected pattern}
+\item{RVI.f}{Fisher transformation of RVI.r}
 }
 \description{
 The Regional Vulnerability Index (RVI), a statistical measure of brain structural abnormality, quantifies an individual’s
@@ -51,9 +55,11 @@ you use this software.
 \examples{
 E.P <- c(-0.37,0.31,-0.02,-0.08,-0.21,0.46,0.31,0.25)
 RVI1 <- RVI_func(ID='ID', DXcontrol='DX==0', covariates=c('Age','Sex'), resp.range=c(5:12),
-EP=E.P, data=RVIpkg::test)
+EP=E.P, data=RVIpkg::data)
 RVI2 <- RVI_func(ID='ID', DXcontrol='DX==0', covariates=NULL, resp.range=c(5:12),
-EP=E.P, data=RVIpkg::test)
+EP=E.P, data=RVIpkg::data)
+RVI3 <- RVI_func(ID='ID', DXcontrol='DX==0', covariates=c('Age','Sex'), resp.range=c(5:12),
+EP=RVIpkg::EP.Subcortical$SSD, data=RVIpkg::data)
 }
 \references{
 Kochunov P, Fan F, Ryan MC, et al. Translating ENIGMA schizophrenia findings using the regional vulnerability index: Association

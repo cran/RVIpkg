@@ -1,6 +1,6 @@
 Package: RVIpkg
 Title: Regional Vulnerability Index
-Version: 0.1.1
+Version: 0.2.3
 Authors@R: c(
     person(given = "Peter",
            family = "Kochunov",
@@ -15,7 +15,7 @@ Authors@R: c(
            role = c("aut"),
            email = "fatal1@umbc.edu")
            )
-Description: The Regional Vulnerability Index (RVI), a statistical measure of brain structural abnormality, quantifies an individual’s similarity to the expected pattern of deficits in schizophrenia (Kochunov P, Fan F, Ryan MC, et al. (2020) <doi:10.1002/hbm.25045>).
+Description: The Regional Vulnerability Index (RVI), a statistical measure of brain structural abnormality, quantifies an individual's similarity to the expected pattern of deficits in schizophrenia (Kochunov P, Fan F, Ryan MC, et al. (2020) <doi:10.1002/hbm.25045>).
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
@@ -23,10 +23,10 @@ RoxygenNote: 7.1.1
 Depends: R (>= 2.10)
 Imports: stats
 NeedsCompilation: no
-Packaged: 2020-09-20 18:38:48 UTC; AbestSG
+Packaged: 2021-01-27 22:48:56 UTC; AbestSG
 Author: Peter Kochunov [aut],
   Si Gao [aut, cre],
   Fatima Talib [aut]
 Maintainer: Si Gao <sgao@som.umaryland.edu>
 Repository: CRAN
-Date/Publication: 2020-09-25 08:30:02 UTC
+Date/Publication: 2021-01-28 05:30:02 UTC

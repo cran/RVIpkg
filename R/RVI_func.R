@@ -5,13 +5,16 @@
 #' consortium. This package outputs the inverse-normal transformed residuals, z-normalized INT residuals, and the final RVI
 #' coefficients.
 #' @param ID a column name of subject IDs in data.
-#' @param DXcontrol an character string specifying control subset(i.e. DXcontrol='DX==0'). Mean and standard deviation for
+#' @param DXcontrol a character string specifying control subset(i.e. DXcontrol='DX==0'). Mean and standard deviation for
 #' z-normalization should be calculated in healthy controls.
-#' @param covariates an optional character vector specifying column names of covariates (i.e. Age, Sex). If covariates=NULL,
+#' @param covariates an optional character vector specifying column names of covariates (i.e. Age, Sex). If covariates=NULL (the default),
 #' residuals will not be adjusted for covariates.
 #' If covariates are specified(i.e. covariates=c('Age','Sex')), residuals will be adjusted for covariates.
-#' @param resp.range a numeric vector specifying column range of responses
-#' @param EP a numeric vector specifying an expected pattern of measurements.
+#' @param resp.range a numeric vector specifying column range of regional neuroimaging traits.
+#' @param EP a numeric vector specifying an expected pattern of measurements. Expected patterns(EP.WM, EP.GM and EP.Subcortical) for
+#' WM, GM and Subcortical are included in the package(Note: If you use an expected pattern from the package, the order of regional neuroimaging
+#' traits need to match the corresponding order of the expected pattern). Check patterns(i.e. RVIpkg::EP.WM$SSD, RVIpkg::EP.WM$MDD, RVIpkg::EP.WM$AD
+#'  EP.GM$SSD, RVIpkg::EP.GM$MDD, RVIpkg::EP.GM$AD, EP.Subcortical$SSD, RVIpkg::EP.Subcortical$MDD, RVIpkg::EP.Subcortical$AD.)
 #' @param data a data frame contains a column of subject IDs, a column of controls, columns of covariates, columns of responses.
 #' @details
 #' The RVI is developed as a simple measure of agreement between an individual's pattern of regional neuroimaging traits and the expected
@@ -24,7 +27,8 @@
 #' @return A list with the following elements:
 #'   \item{i.norm.resid}{inverse-normal transformed(INT) residuals}
 #'   \item{z.norm.resid}{z-normalized INT residuals}
-#'   \item{RVI}{pearson correlation coefficient between the z-normalized INT residuals of subjects and their expected pattern}
+#'   \item{RVI.r}{pearson correlation coefficient between the z.norm.resid of subjects and their expected pattern}
+#'   \item{RVI.f}{Fisher transformation of RVI.r}
 #' @note
 #' The RVI_func() function is developed at the Maryland Psychiatric Research Center, Department of Psychiatry,
 #' University of Maryland School of Medicine. This project is supported by NIH R01 EB015611 grant. Please cite our funding if
@@ -39,12 +43,14 @@
 #' @examples
 #' E.P <- c(-0.37,0.31,-0.02,-0.08,-0.21,0.46,0.31,0.25)
 #' RVI1 <- RVI_func(ID='ID', DXcontrol='DX==0', covariates=c('Age','Sex'), resp.range=c(5:12),
-#' EP=E.P, data=RVIpkg::test)
+#' EP=E.P, data=RVIpkg::data)
 #' RVI2 <- RVI_func(ID='ID', DXcontrol='DX==0', covariates=NULL, resp.range=c(5:12),
-#' EP=E.P, data=RVIpkg::test)
+#' EP=E.P, data=RVIpkg::data)
+#' RVI3 <- RVI_func(ID='ID', DXcontrol='DX==0', covariates=c('Age','Sex'), resp.range=c(5:12),
+#' EP=RVIpkg::EP.Subcortical$SSD, data=RVIpkg::data)
 #' @export
 
-RVI_func <- function(ID, DXcontrol, covariates, resp.range,EP, data) {
+RVI_func <- function(ID, DXcontrol, covariates=NULL, resp.range, EP, data) {
   resp.names <- names(data)[resp.range]
   resp.data <- data.frame(data[,resp.range])
   colnames(resp.data) <- resp.names
@@ -81,8 +87,9 @@ RVI_func <- function(ID, DXcontrol, covariates, resp.range,EP, data) {
   }
   colnames(z.norm.data) <- c(ID,resp.names)
 
-  RVI.data <- data.frame(ID=data[,which(names(data)==ID)],RVI=NA)
-  for (i in 1:nrow(z.norm.data)) {RVI.data$RVI[i] <- -stats::cor(unlist(z.norm.data[i,2:(length(resp.range)+1)]),EP)}
+  RVI.data <- data.frame(ID=data[,which(names(data)==ID)],RVI.r=NA)
+  for (i in 1:nrow(z.norm.data)) {RVI.data$RVI.r[i] <- stats::cor(unlist(z.norm.data[i,2:(length(resp.range)+1)]),EP)}
+  RVI.data$RVI.f <- 0.5*log((1+RVI.data$RVI.r)/(1-RVI.data$RVI.r))
 
   out <- list()
   out$i.norm.resid <- i.norm.data
