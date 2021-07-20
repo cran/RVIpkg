@@ -21,7 +21,7 @@ If covariates are specified(i.e. covariates=c('Age','Sex')), residuals will be a
 \item{EP}{a numeric vector specifying an expected pattern of measurements. Expected patterns(EP.WM, EP.GM and EP.Subcortical) for
 WM, GM and Subcortical are included in the package(Note: If you use an expected pattern from the package, the order of regional neuroimaging
 traits need to match the corresponding order of the expected pattern). Check patterns(i.e. RVIpkg::EP.WM$SSD, RVIpkg::EP.WM$MDD, RVIpkg::EP.WM$AD
-EP.GM$SSD, RVIpkg::EP.GM$MDD, RVIpkg::EP.GM$AD, EP.Subcortical$SSD, RVIpkg::EP.Subcortical$MDD, RVIpkg::EP.Subcortical$AD.)}
+EP.GM$SSD, RVIpkg::EP.GM$MDD, RVIpkg::EP.GM$AD, EP.Subcortical$SSD, RVIpkg::EP.Subcortical$MDD, RVIpkg::EP.Subcortical$AD .etc.)}
 
 \item{data}{a data frame contains a column of subject IDs, a column of controls, columns of covariates, columns of responses.}
 }
@@ -29,8 +29,9 @@ EP.GM$SSD, RVIpkg::EP.GM$MDD, RVIpkg::EP.GM$AD, EP.Subcortical$SSD, RVIpkg::EP.S
 A list with the following elements:
 \item{i.norm.resid}{inverse-normal transformed(INT) residuals}
 \item{z.norm.resid}{z-normalized INT residuals}
-\item{RVI.r}{pearson correlation coefficient between the z.norm.resid of subjects and their expected pattern}
-\item{RVI.f}{Fisher transformation of RVI.r}
+\item{RVI}{RVI.r:pearson correlation coefficient between the z.norm.resid of subjects and their expected pattern. Fisher.Z:Fisher
+transformation of RVI.r. Dot.product: dot or scalar product of z.norm.resid and a expected pattern. Z.projection: projection on a pattern.
+cos: cosin between Z.projection and z.norm.resid. magnitude: magnitude of z.norm.resid.}
 }
 \description{
 The Regional Vulnerability Index (RVI), a statistical measure of brain structural abnormality, quantifies an individual’s

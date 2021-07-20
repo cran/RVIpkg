@@ -5,12 +5,13 @@
 \alias{EP.Subcortical}
 \title{Expected patterns of subcortical}
 \format{
-A data frame with 8 rows and 4 variables:
+A data frame with 8 rows and 5 variables:
 \describe{
 \item{Subcortical}{names of regional neuroimaging traits}
 \item{SSD}{the expected pattern of Schizophrenia Spectrum Disorder}
 \item{MDD}{the expected pattern of Major Depressive Disorder}
 \item{AD}{the expected pattern of Alzheimer's Disease}
+\item{BD}{the expected pattern of Bipolar Disorder}
 }
 }
 \source{

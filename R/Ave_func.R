@@ -27,7 +27,7 @@ Ave_func <- function(resp.range, type='all', data) {
     num_colname <- substr(as.numeric(unlist(regmatches(colnames(resp.data)[i], gregexpr("[[:digit:]]+\\.*[[:digit:]]*", colnames(resp.data)[i])))), start = 1, stop = 5)[1]
     for (j in 1:nrow(FID_list)) {
       FID <- FID_list$ID[j]
-      if(length(num_colname>0)){
+      if(is.na(num_colname)==F){
         if(num_colname==FID){
           colnames(out.data)[i] <- FID_list$name[j]
         }
