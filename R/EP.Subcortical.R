@@ -9,6 +9,7 @@
 #'   \item{MDD}{the expected pattern of Major Depressive Disorder}
 #'   \item{AD}{the expected pattern of Alzheimer's Disease}
 #'   \item{BD}{the expected pattern of Bipolar Disorder}
+#'   \item{PD}{the expected pattern of Parkinson's disease}
 #' }
 #' @source The 'EP.Subcortical' pattern is from Maryland Psychiatric Research Center, Department of Psychiatry, University of Maryland School of Medicine.
 "EP.Subcortical"

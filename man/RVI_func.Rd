@@ -13,15 +13,15 @@ RVI_func(ID, DXcontrol, covariates = NULL, resp.range, EP, data)
 z-normalization should be calculated in healthy controls.}
 
 \item{covariates}{an optional character vector specifying column names of covariates (i.e. Age, Sex). If covariates=NULL (the default),
-residuals will not be adjusted for covariates.
+residuals will not be adjusted for any covariates.
 If covariates are specified(i.e. covariates=c('Age','Sex')), residuals will be adjusted for covariates.}
 
 \item{resp.range}{a numeric vector specifying column range of regional neuroimaging traits.}
 
 \item{EP}{a numeric vector specifying an expected pattern of measurements. Expected patterns(EP.WM, EP.GM and EP.Subcortical) for
 WM, GM and Subcortical are included in the package(Note: If you use an expected pattern from the package, the order of regional neuroimaging
-traits need to match the corresponding order of the expected pattern). Check patterns(i.e. RVIpkg::EP.WM$SSD, RVIpkg::EP.WM$MDD, RVIpkg::EP.WM$AD
-EP.GM$SSD, RVIpkg::EP.GM$MDD, RVIpkg::EP.GM$AD, EP.Subcortical$SSD, RVIpkg::EP.Subcortical$MDD, RVIpkg::EP.Subcortical$AD .etc.)}
+traits need to match up the corresponding order of the expected pattern). Check patterns(i.e. RVIpkg::EP.WM$SSD, RVIpkg::EP.WM$MDD, RVIpkg::EP.WM$AD,
+RVIpkg::EP.WM$BD ,RVIpkg::EP.WM$PD .etc.)}
 
 \item{data}{a data frame contains a column of subject IDs, a column of controls, columns of covariates, columns of responses.}
 }
