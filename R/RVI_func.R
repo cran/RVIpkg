@@ -1,35 +1,31 @@
 #' @title Regional Vulnerability Index
 #' @description
 #' The Regional Vulnerability Index (RVI), a statistical measure of brain structural abnormality, quantifies an individual’s
-#' similarity to the expected pattern of deficits seen in schizophrenia derived from large-scale meta-analyses by the ENIGMA
-#' consortium. This package outputs the inverse-normal transformed residuals, z-normalized INT residuals, and the final RVI
-#' coefficients.
+#' similarity to the expected pattern (effect size) of deficits seen in schizophrenia derived from large-scale meta-analyses by the ENIGMA
+#' consortium. This package outputs the inverse-normal transformed residuals, z-normalized INT residuals, and the final RVI coefficients.
 #' @param ID a column name of subject IDs in data.
-#' @param DXcontrol a character string specifying control subset(i.e. DXcontrol='DX==0'). Mean and standard deviation for
+#' @param DXcontrol a character string specifying control subset(i.e. DXcontrol='DX==0'or DXcontrol='DX=="CN"'). Mean and standard deviation for
 #' z-normalization should be calculated in healthy controls.
 #' @param covariates an optional character vector specifying column names of covariates (i.e. Age, Sex). If covariates=NULL (the default),
-#' residuals will not be adjusted for any covariates.
-#' If covariates are specified(i.e. covariates=c('Age','Sex')), residuals will be adjusted for covariates.
+#' residuals will not be adjusted for any covariate. If covariates are specified (i.e. covariates=c('Age','Sex')), residuals will be adjusted for covariates.
 #' @param resp.range a numeric vector specifying column range of regional neuroimaging traits.
 #' @param EP a numeric vector specifying an expected pattern of measurements. Expected patterns(EP.WM, EP.GM and EP.Subcortical) for
-#' WM, GM and Subcortical are included in the package(Note: If you use an expected pattern from the package, the order of regional neuroimaging
-#' traits need to match up the corresponding order of the expected pattern). Check patterns(i.e. RVIpkg::EP.WM$SSD, RVIpkg::EP.WM$MDD, RVIpkg::EP.WM$AD,
-#' RVIpkg::EP.WM$BD ,RVIpkg::EP.WM$PD .etc.)
+#' WM, GM and Subcortical are included in the package(Note: If you use an expected pattern, you need to make sure the order of regional neuroimaging
+#' traits in your data match up the corresponding order of the expected pattern). The patterns can be extract in the package (i.e. RVIpkg::EP.WM$SSD,
+#' RVIpkg::EP.WM$MDD, RVIpkg::EP.WM$AD, RVIpkg::EP.WM$BD ,RVIpkg::EP.WM$PD .etc.). They were developed using neuroimaging data of UK Biobank (UKBB).
 #' @param data a data frame contains a column of subject IDs, a column of controls, columns of covariates, columns of responses.
 #' @details
 #' The RVI is developed as a simple measure of agreement between an individual's pattern of regional neuroimaging traits and the expected
-#' pattern of schizophrenia. First, residuals are extracted from simple linear regression by regressing out effects of optional covariates
-#' (age, sex) and intracranial brain volume using the full sample (patients and controls). The residuals are inverse-normal transformed (INT)
-#' based on residuals' ranks, and then the transformed residuals are z-normalized using mean and standard deviation calculated in healthy
-#' controls. The RVI is then calculated as a Pearson correlation coefficient between z-normalized values of subjects and their expected
-#' pattern. These expected patterns include cortical, subcortical, and white matter intracranial brain volumes for Schizophrenia Spectrum
-#' Disorders (SSD).
+#' pattern of schizophrenia. First, all observations of each regional neuroimaging trait are regressed out optional covariates using linear regression,
+#' and then residuals are extracted from the model after removing effects of the optional covariates. The optional covariates could be age, sex,
+#' intracranial brain volume and/or .etc in the data. After that the residuals are inverse-normal transformed (INT) based on residuals' ranks, and the transformed
+#' residuals are z-normalized using mean and standard deviation calculated in healthy controls. For each subject, the RVI is then calculated as a Pearson correlation
+#' coefficient between z-normalized values of all traits from the subject and expected pattern of the traits. These expected patterns include cortical thickness,
+#' subcortical volume, and white matter fractional anisotropy (FA) for mental illnesses and metabolic diseases.
 #' @return A list with the following elements:
 #'   \item{i.norm.resid}{inverse-normal transformed(INT) residuals}
 #'   \item{z.norm.resid}{z-normalized INT residuals}
-#'   \item{RVI}{RVI.r:pearson correlation coefficient between the z.norm.resid of subjects and their expected pattern. Fisher.Z:Fisher
-#'   transformation of RVI.r. Dot.product: dot or scalar product of z.norm.resid and a expected pattern. Z.projection: projection on a pattern.
-#'   cos: cosin between Z.projection and z.norm.resid. magnitude: magnitude of z.norm.resid.}
+#'   \item{RVI}{RVI:pearson correlation coefficient between the z.norm.resid of subjects and corresponding expected pattern. EDP: ENIGMA dot product.}
 #' @note
 #' The RVI_func() function is developed at the Maryland Psychiatric Research Center, Department of Psychiatry,
 #' University of Maryland School of Medicine. This project is supported by NIH R01 EB015611 grant. Please cite our funding if
@@ -61,7 +57,7 @@ RVI_func <- function(ID, DXcontrol, covariates=NULL, resp.range, EP, data) {
   if(is.null(covariates)==T){
     for (i in 1:ncol(resp.data)) {
       formula <- stats::as.formula(paste(resp.names[i], ' ~ ', 1))
-      model <- stats::lm(formula, data=data)
+      model <- stats::lm(formula, na.action=stats::na.exclude, data=data)
       model.residuals <- stats::resid(model)
       i.norm.residuals <- stats::qnorm((rank(model.residuals, na.last = "keep")) / (sum(!is.na(model.residuals))+1))
       i.norm.data <- cbind(i.norm.data,i.norm.residuals)
@@ -71,7 +67,7 @@ RVI_func <- function(ID, DXcontrol, covariates=NULL, resp.range, EP, data) {
   else{
     for (i in 1:ncol(resp.data)) {
       formula <- stats::as.formula(paste(resp.names[i], ' ~ ', paste(covariates, collapse = "+")))
-      model <- stats::lm(formula, data=data)
+      model <- stats::lm(formula,na.action=stats::na.exclude, data=data)
       model.residuals <- stats::resid(model)
       i.norm.residuals <- stats::qnorm((rank(model.residuals, na.last = "keep")) / (sum(!is.na(model.residuals))+1))
       i.norm.data <- cbind(i.norm.data,i.norm.residuals)
@@ -88,14 +84,10 @@ RVI_func <- function(ID, DXcontrol, covariates=NULL, resp.range, EP, data) {
   }
   colnames(z.norm.data) <- c(ID,resp.names)
 
-  RVI.data <- data.frame(ID=data[,which(names(data)==ID)],RVI.r=NA)
-  for (i in 1:nrow(z.norm.data)) {RVI.data$RVI.r[i] <- stats::cor(unlist(z.norm.data[i,2:(length(resp.range)+1)]),EP)}
-  RVI.data$Fisher.Z <- 0.5*log((1+RVI.data$RVI.r)/(1-RVI.data$RVI.r))
+  RVI.data <- data.frame(ID=data[,which(names(data)==ID)],RVI=NA)
   for (i in 1:nrow(z.norm.data)) {
-    RVI.data$Dot.product[i] <- sum(unlist(z.norm.data[i,2:(length(resp.range)+1)])*EP)
-    RVI.data$Z.projection[i] <- RVI.data$Dot.product[i]/sqrt(sum(EP^2))
-    RVI.data$cos[i] <- RVI.data$Dot.product[i]/sqrt(sum(unlist(z.norm.data[i,2:(length(resp.range)+1)])^2))/sqrt(sum(EP^2))
-    RVI.data$magnitude[i] <- sqrt(sum(unlist(z.norm.data[i,2:(length(resp.range)+1)])^2))
+    RVI.data$RVI[i] <- stats::cor(unlist(z.norm.data[i,2:(length(resp.range)+1)]), EP, use = "complete.obs")
+    RVI.data$EDP[i] <- sum(unlist(z.norm.data[i,2:(length(resp.range)+1)])*EP, na.rm = TRUE)
     }
 
   out <- list()
