@@ -1,11 +1,11 @@
 Package: RVIpkg
 Title: Regional Vulnerability Index
-Version: 0.2.8
+Version: 0.3.0
 Authors@R: c(
     person(given = "Peter",
            family = "Kochunov",
            role = c("aut","cph"),
-           email = "pkochunov@gmail.com"),
+           email = "pkochunov@som.umaryland.edu"),
     person(given = "Si",
            family = "Gao",
            role = c("aut", "cre"),
@@ -14,6 +14,10 @@ Authors@R: c(
            family = "Hatch",
            role = c("aut"),
            email = "khatch@som.umaryland.edu"),
+    person(given = "Yizhou",
+           family = "Ma",
+           role = c("aut"),
+           email = "yizhou.ma@som.umaryland.edu"),
     person(given = "Fatima",
            family = "Talib",
            role = c("aut"),
@@ -27,11 +31,12 @@ RoxygenNote: 7.1.2
 Depends: R (>= 2.10)
 Imports: stats
 NeedsCompilation: no
-Packaged: 2021-11-05 16:16:56 UTC; sgao
+Packaged: 2022-03-10 20:14:53 UTC; sgao
 Author: Peter Kochunov [aut, cph],
   Si Gao [aut, cre],
   Kathryn Hatch [aut],
+  Yizhou Ma [aut],
   Fatima Talib [aut]
 Maintainer: Si Gao <sgao@som.umaryland.edu>
 Repository: CRAN
-Date/Publication: 2021-11-05 17:00:02 UTC
+Date/Publication: 2022-03-10 22:10:15 UTC

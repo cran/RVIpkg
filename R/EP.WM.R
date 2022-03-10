@@ -2,17 +2,22 @@
 #'
 #' @description the expected patterns of white matter in schizophrenia derived from large-scale meta-analyses by the ENIGMA.
 #'
-#' @format A data frame with 25 rows and 5 variables:
+#' @format A data frame with 24 rows and 14 variables:
 #' \describe{
 #'   \item{WM}{white matter fractional anisotropy}
-#'   \item{SSD}{the expected pattern of Schizophrenia Spectrum Disorder}
-#'   \item{MDD}{the expected pattern of Major Depressive Disorder}
-#'   \item{AD}{the expected pattern of Alzheimer's Disease}
-#'   \item{BD}{the expected pattern of Bipolar Disorder}
-#'   \item{ADNI_OSIRIX}{the expected pattern of Alzheimer's Disease Neuroimaging Initiative + OSIRIX}
-#'   \item{Diabetes}{the expected pattern of diabetes}
-#'   \item{HighBP}{the expected pattern of high blood pressure (hypertension)}
-#'   \item{HighLipids}{the expected pattern of hyperlipidemia}
+#'   \item{SSD}{the expected pattern of Schizophrenia Spectrum Disorder (\doi{10.1038/mp.2017.170} table 1; \doi{10.1002/hbm.24998} table 2)}
+#'   \item{MDD}{the expected pattern of Major Depressive Disorder (\doi{10.1038/s41380-019-0477-2} Table S4; \doi{10.1002/hbm.24998} table 2)}
+#'   \item{AD_ADNI}{the expected pattern of Alzheimer's Disease (\doi{10.1016/j.nicl.2021.102574} table S1)}
+#'   \item{AD_ADNIOSYRIX}{the expected pattern of Alzheimer's Disease Neuroimaging Initiative + OSIRIX}
+#'   \item{BD}{the expected pattern of Bipolar Disorder (\doi{10.1002/hbm.24998} table 2)}
+#'   \item{Diabetes}{the expected pattern of Diabetes}
+#'   \item{HighBP}{the expected pattern of Hypertension}
+#'   \item{HighLipids}{the expected pattern of Hyperlipidemia}
+#'   \item{MET}{the expected pattern of Metabolic diseases(diabetes, hypertension and hyperlipidemia)}
+#'   \item{DS_22q}{the expected pattern of DiGeorge syndrome (\doi{10.1002/hbm.24998} table 2)}
+#'   \item{PTSD}{the expected pattern of Post-traumatic stress disorder (\doi{10.1002/hbm.24998} table 2)}
+#'   \item{TBI}{the expected pattern of Traumatic brain injury (\doi{10.1002/hbm.24998} table2)}
+#'   \item{OCD}{the expected pattern of Obsessive-compulsive disorder (\doi{10.1002/hbm.24998} table 2)}
 #' }
 #' @source The 'EP.WM' pattern is from Maryland Psychiatric Research Center, Department of Psychiatry, University of Maryland School of Medicine.
 "EP.WM"

@@ -5,18 +5,19 @@
 \alias{EP.GM}
 \title{Expected patterns of gray matter}
 \format{
-A data frame with 34 rows and 5 variables:
+A data frame with 33 rows and 11 variables:
 \describe{
 \item{GM}{grey matter thickness}
-\item{SSD}{the expected pattern of Schizophrenia Spectrum Disorder}
-\item{MDD}{the expected pattern of Major Depressive Disorder}
-\item{AD}{the expected pattern of Alzheimer's Disease}
-\item{BD}{the expected pattern of Bipolar Disorder}
+\item{SSD}{the expected pattern of Schizophrenia Spectrum Disorder (\doi{10.1016/j.biopsych.2018.04.023} table S4a)}
+\item{MDD}{the expected pattern of Major Depressive Disorder (\doi{10.1038/mp.2016.60} table 1)}
+\item{AD_ADNI}{the expected pattern of Alzheimer's Disease (\doi{10.1016/j.nicl.2021.102574} table S1)}
+\item{AD_ADNIOSYRIX}{the expected pattern of Alzheimer's Disease Neuroimaging Initiative + OSIRIX}
+\item{BD}{the expected pattern of Bipolar Disorder (\doi{10.1038/mp.2017.73} table 1)}
 \item{PD}{the expected pattern of Parkinson's disease}
-\item{ADNI_OSIRIX}{the expected pattern of Alzheimer's Disease Neuroimaging Initiative + OSIRIX}
-\item{Diabetes}{the expected pattern of diabetes}
-\item{HighBP}{the expected pattern of high blood pressure (hypertension)}
-\item{HighLipids}{the expected pattern of hyperlipidemia}
+\item{Diabetes}{the expected pattern of Diabetes}
+\item{HighBP}{the expected pattern of Hypertension}
+\item{HighLipids}{the expected pattern of Hyperlipidemia}
+\item{MET}{the expected pattern of Metabolic diseases(Diabetes, Hypertension and Hyperlipidemia)}
 }
 }
 \source{
