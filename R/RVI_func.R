@@ -2,7 +2,7 @@
 #' @description
 #' The Regional Vulnerability Index (RVI), a statistical measure of brain structural abnormality, quantifies an individual’s similarity to the expected pattern
 #' (effect size) of deficits seen in schizophrenia derived from large-scale meta-analyses by the ENIGMA consortium. This package outputs the inverse-normal
-#' transformed (INT) residuals, z-normalized INT residuals, RVI and ENIGMA dot product (EPD).
+#' transformed (INT) residuals, z-normalized INT residuals, RVI and Alignment Vulnerability Index (AVI).
 #' @param ID a column name of subject IDs in data.
 #' @param DXcontrol a character string specifying control subset(i.e. DXcontrol='DX==0'or DXcontrol='DX=="CN"'). Mean and standard deviation of z-normalization
 #' should be calculated in healthy controls.
@@ -20,14 +20,15 @@
 #' the model after removing effects of the optional covariates. The optional covariates could be age, sex, intracranial brain volume and/or .etc in the data. After
 #' that the residuals are inverse-normal transformed based on residuals' ranks, and then the INT residuals are z-normalized/standardized using mean and standard
 #' deviation of healthy controls to get z-normalized INT residuals. For each subject, the RVI is then calculated as a Pearson correlation coefficient between the
-#' z-normalized INT residuals of the traits and corresponding expected pattern of the traits and the EDP is the dot product of the z-normalized INT residuals of the
+#' z-normalized INT residuals of the traits and corresponding expected pattern of the traits and the AVI is the dot product of the z-normalized INT residuals of the
 #' traits and corresponding expected pattern of the traits. These expected patterns include cortical thickness, subcortical volume, and white matter FA for mental
 #' illnesses and metabolic diseases.
 #' @return A list with the following elements:
 #'   \item{i.norm.resid}{INT residuals}
 #'   \item{z.norm.resid}{z-normalized/standardized INT residuals}
-#'   \item{RVI}{RVI:the Pearson correlation coefficient between the z-normalized INT residuals and corresponding expected pattern. EDP: dot product of the z-normalized
-#'   INT residuals and corresponding expected pattern.}
+#'   \item{RVI}{RVI: the Pearson correlation coefficient between the z-normalized INT residuals and corresponding expected pattern;
+#'   AVI: the dot product of the z-normalized INT residuals and corresponding expected pattern;
+#'   Ave_AVI (averaged AVI): the AVI divides by length of vector}
 #' @note
 #' The RVI_func() function is developed at the Maryland Psychiatric Research Center, Department of Psychiatry,
 #' University of Maryland School of Medicine. This project is supported by NIH R01 EB015611 grant. Please cite our funding if
@@ -51,7 +52,7 @@
 #' @export
 
 RVI_func <- function(ID, DXcontrol, covariates=NULL, resp.range, EP, data) {
-  message("If the old atlas from ENIGMA DTI pipeline was used - e.g. label IFO is missing. Then the following recoding in your data needs to be renamed. (IFO->UNC and UNC->TAP)")
+  message("Warning: If the old atlas from ENIGMA DTI pipeline was used (e.g. label TAP is missing), then the following columns in your data need to be renamed: IFO->UNC and UNC->TAP.")
   resp.names <- names(data)[resp.range]
   resp.data <- data.frame(data[,resp.range])
   colnames(resp.data) <- resp.names
@@ -81,18 +82,19 @@ RVI_func <- function(ID, DXcontrol, covariates=NULL, resp.range, EP, data) {
 
   z.norm.data <- data.frame(ID=data[,which(names(data)==ID)])
   for (i in 2:ncol(i.norm.data)) {
-    inorm.control.mean <- mean(i.norm.data[control.idx,i])
-    inorm.control.sd <- stats::sd(i.norm.data[control.idx,i])
+    inorm.control.mean <- mean(i.norm.data[control.idx,i], na.rm = T)
+    inorm.control.sd <- stats::sd(i.norm.data[control.idx,i], na.rm = T)
     z.norm.residuals <- (i.norm.data[,i] - inorm.control.mean)/inorm.control.sd
     z.norm.data <- cbind(z.norm.data,z.norm.residuals)
   }
   colnames(z.norm.data) <- c(ID,resp.names)
 
-  RVI.data <- data.frame(ID=data[,which(names(data)==ID)],RVI=NA)
+  RVI.data <- data.frame(ID=data[,which(names(data)==ID)],RVI=NA,AVI=NA)
+  sumna <- function(x) {if(all(is.na(x))==T) NA else sum(x, na.rm = TRUE)}
   for (i in 1:nrow(z.norm.data)) {
     RVI.data$RVI[i] <- stats::cor(unlist(z.norm.data[i,2:(length(resp.range)+1)]), EP, use = "na.or.complete")
-    RVI.data$EDP[i] <- sum(unlist(z.norm.data[i,2:(length(resp.range)+1)])*EP, na.rm = TRUE)
-    }
+    RVI.data$AVI[i] <- sumna(unlist(z.norm.data[i,2:(length(resp.range)+1)])*EP)
+  }
 
   out <- list()
   out$i.norm.resid <- i.norm.data

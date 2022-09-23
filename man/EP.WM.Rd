@@ -16,10 +16,10 @@ A data frame with 24 rows and 14 variables:
 \item{Diabetes}{the expected pattern of Diabetes}
 \item{HighBP}{the expected pattern of Hypertension}
 \item{HighLipids}{the expected pattern of Hyperlipidemia}
-\item{MET}{the expected pattern of Metabolic diseases(diabetes, hypertension and hyperlipidemia)}
-\item{DS_22q}{the expected pattern of DiGeorge syndrome (\doi{10.1002/hbm.24998} table 2)}
+\item{MET}{the expected pattern of Metabolic diseases (diabetes, hypertension and hyperlipidemia)}
+\item{DS_22q}{the expected pattern of 22q11.2 deletion syndrome (\doi{10.1002/hbm.24998} table 2; \doi{10.1038/s41380-019-0450-0} table S6)}
 \item{PTSD}{the expected pattern of Post-traumatic stress disorder (\doi{10.1002/hbm.24998} table 2)}
-\item{TBI}{the expected pattern of Traumatic brain injury (\doi{10.1002/hbm.24998} table2)}
+\item{TBI}{the expected pattern of Traumatic brain injury (\doi{10.1002/hbm.24998} table 2)}
 \item{OCD}{the expected pattern of Obsessive-compulsive disorder (\doi{10.1002/hbm.24998} table 2)}
 }
 }

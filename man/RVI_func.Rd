@@ -28,13 +28,14 @@ sure the order of regional neuroimaging traits in your data match up the corresp
 A list with the following elements:
 \item{i.norm.resid}{INT residuals}
 \item{z.norm.resid}{z-normalized/standardized INT residuals}
-\item{RVI}{RVI:the Pearson correlation coefficient between the z-normalized INT residuals and corresponding expected pattern. EDP: dot product of the z-normalized
-INT residuals and corresponding expected pattern.}
+\item{RVI}{RVI: the Pearson correlation coefficient between the z-normalized INT residuals and corresponding expected pattern;
+AVI: the dot product of the z-normalized INT residuals and corresponding expected pattern;
+Ave_AVI (averaged AVI): the AVI divides by length of vector}
 }
 \description{
 The Regional Vulnerability Index (RVI), a statistical measure of brain structural abnormality, quantifies an individual’s similarity to the expected pattern
 (effect size) of deficits seen in schizophrenia derived from large-scale meta-analyses by the ENIGMA consortium. This package outputs the inverse-normal
-transformed (INT) residuals, z-normalized INT residuals, RVI and ENIGMA dot product (EPD).
+transformed (INT) residuals, z-normalized INT residuals, RVI and Alignment Vulnerability Index (AVI).
 }
 \details{
 The RVI is developed as a simple measure of agreement between an individual's pattern of regional neuroimaging traits and the expected pattern of schizophrenia.
@@ -42,7 +43,7 @@ First, all observations of each regional neuroimaging trait are regressed out op
 the model after removing effects of the optional covariates. The optional covariates could be age, sex, intracranial brain volume and/or .etc in the data. After
 that the residuals are inverse-normal transformed based on residuals' ranks, and then the INT residuals are z-normalized/standardized using mean and standard
 deviation of healthy controls to get z-normalized INT residuals. For each subject, the RVI is then calculated as a Pearson correlation coefficient between the
-z-normalized INT residuals of the traits and corresponding expected pattern of the traits and the EDP is the dot product of the z-normalized INT residuals of the
+z-normalized INT residuals of the traits and corresponding expected pattern of the traits and the AVI is the dot product of the z-normalized INT residuals of the
 traits and corresponding expected pattern of the traits. These expected patterns include cortical thickness, subcortical volume, and white matter FA for mental
 illnesses and metabolic diseases.
 }

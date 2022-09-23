@@ -2,7 +2,7 @@
 #'
 #' @description the expected patterns of gray matter in schizophrenia derived from large-scale meta-analyses by the ENIGMA.
 #'
-#' @format A data frame with 33 rows and 11 variables:
+#' @format A data frame with 33 rows and 13 variables:
 #' \describe{
 #'   \item{GM}{grey matter thickness}
 #'   \item{SSD}{the expected pattern of Schizophrenia Spectrum Disorder (\doi{10.1016/j.biopsych.2018.04.023} table S4a)}
@@ -14,7 +14,9 @@
 #'   \item{Diabetes}{the expected pattern of Diabetes}
 #'   \item{HighBP}{the expected pattern of Hypertension}
 #'   \item{HighLipids}{the expected pattern of Hyperlipidemia}
-#'   \item{MET}{the expected pattern of Metabolic diseases(Diabetes, Hypertension and Hyperlipidemia)}
+#'   \item{MET}{the expected pattern of Metabolic diseases (Diabetes, Hypertension and Hyperlipidemia)}
+#'   \item{DS_22q}{the expected pattern of 22q11.2 deletion syndrome (\doi{10.1038/s41380-018-0078-5} table S10a)}
+#'   \item{Suicide}{the expected pattern of suicidal ideation (\doi{10.1101/2021.09.27.21264068} table S8)}
 #' }
 #' @source The 'EP.GM' pattern is from Maryland Psychiatric Research Center, Department of Psychiatry, University of Maryland School of Medicine.
 "EP.GM"
