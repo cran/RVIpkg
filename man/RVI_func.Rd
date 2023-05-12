@@ -4,7 +4,16 @@
 \alias{RVI_func}
 \title{Regional Vulnerability Index}
 \usage{
-RVI_func(ID, DXcontrol, covariates = NULL, resp.range, EP, data)
+RVI_func(
+  ID,
+  DXcontrol,
+  covariates = NULL,
+  resp.range,
+  EP,
+  sign = FALSE,
+  fisherZ = FALSE,
+  data
+)
 }
 \arguments{
 \item{ID}{a column name of subject IDs in data.}
@@ -22,6 +31,10 @@ fractional anisotropy (FA), cortical matter thickness and subcortical volume are
 sure the order of regional neuroimaging traits in your data match up the corresponding order of the expected pattern). The patterns can be extract in the package
 (i.e. RVIpkg::EP.WM$SSD, RVIpkg::EP.WM$MDD, RVIpkg::EP.WM$AD, RVIpkg::EP.WM$BD ,RVIpkg::EP.WM$PD .etc.). They were developed using neuroimaging data of UK Biobank (UKBB).}
 
+\item{sign}{a logical value indicating whether the AVI use signs from RVI.}
+
+\item{fisherZ}{a logical value indicating whether the result should generate fisher-z transformed RVI.}
+
 \item{data}{a data frame contains a column of subject IDs, a column of controls, columns of covariates, columns of responses.}
 }
 \value{
@@ -30,7 +43,8 @@ A list with the following elements:
 \item{z.norm.resid}{z-normalized/standardized INT residuals}
 \item{RVI}{RVI: the Pearson correlation coefficient between the z-normalized INT residuals and corresponding expected pattern;
 AVI: the dot product of the z-normalized INT residuals and corresponding expected pattern;
-Ave_AVI (averaged AVI): the AVI divides by length of vector}
+RVI.fisherz: Fisher z-transformed RVI
+}
 }
 \description{
 The Regional Vulnerability Index (RVI), a statistical measure of brain structural abnormality, quantifies an individual’s similarity to the expected pattern

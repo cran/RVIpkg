@@ -13,6 +13,8 @@
 #' fractional anisotropy (FA), cortical matter thickness and subcortical volume are included in the package (Note: If you use an expected pattern, you need to make
 #' sure the order of regional neuroimaging traits in your data match up the corresponding order of the expected pattern). The patterns can be extract in the package
 #' (i.e. RVIpkg::EP.WM$SSD, RVIpkg::EP.WM$MDD, RVIpkg::EP.WM$AD, RVIpkg::EP.WM$BD ,RVIpkg::EP.WM$PD .etc.). They were developed using neuroimaging data of UK Biobank (UKBB).
+#' @param sign a logical value indicating whether the AVI use signs from RVI.
+#' @param fisherZ a logical value indicating whether the result should generate fisher-z transformed RVI.
 #' @param data a data frame contains a column of subject IDs, a column of controls, columns of covariates, columns of responses.
 #' @details
 #' The RVI is developed as a simple measure of agreement between an individual's pattern of regional neuroimaging traits and the expected pattern of schizophrenia.
@@ -28,7 +30,8 @@
 #'   \item{z.norm.resid}{z-normalized/standardized INT residuals}
 #'   \item{RVI}{RVI: the Pearson correlation coefficient between the z-normalized INT residuals and corresponding expected pattern;
 #'   AVI: the dot product of the z-normalized INT residuals and corresponding expected pattern;
-#'   Ave_AVI (averaged AVI): the AVI divides by length of vector}
+#'   RVI.fisherz: Fisher z-transformed RVI
+#'   }
 #' @note
 #' The RVI_func() function is developed at the Maryland Psychiatric Research Center, Department of Psychiatry,
 #' University of Maryland School of Medicine. This project is supported by NIH R01 EB015611 grant. Please cite our funding if
@@ -51,7 +54,7 @@
 #' EP=EP2, data=RVIpkg::data)
 #' @export
 
-RVI_func <- function(ID, DXcontrol, covariates=NULL, resp.range, EP, data) {
+RVI_func <- function(ID, DXcontrol, covariates=NULL, resp.range, EP, sign=FALSE, fisherZ=FALSE, data) {
   message("Warning: If the old atlas from ENIGMA DTI pipeline was used (e.g. label TAP is missing), then the following columns in your data need to be renamed: IFO->UNC and UNC->TAP.")
   resp.names <- names(data)[resp.range]
   resp.data <- data.frame(data[,resp.range])
@@ -89,12 +92,23 @@ RVI_func <- function(ID, DXcontrol, covariates=NULL, resp.range, EP, data) {
   }
   colnames(z.norm.data) <- c(ID,resp.names)
 
-  RVI.data <- data.frame(ID=data[,which(names(data)==ID)],RVI=NA,AVI=NA)
+  RVI.data <- data.frame(ID=data[,which(names(data)==ID)], RVI=NA, AVI=NA)
   sumna <- function(x) {if(all(is.na(x))==T) NA else sum(x, na.rm = TRUE)}
   for (i in 1:nrow(z.norm.data)) {
     RVI.data$RVI[i] <- stats::cor(unlist(z.norm.data[i,2:(length(resp.range)+1)]), EP, use = "na.or.complete")
-    RVI.data$AVI[i] <- sumna(unlist(z.norm.data[i,2:(length(resp.range)+1)])*EP)
   }
+
+  if(sign==TRUE){
+    for (i in 1:nrow(z.norm.data)) {RVI.data$AVI[i] <- abs(sumna(unlist(z.norm.data[i,2:(length(resp.range)+1)])*EP))*sign(RVI.data$RVI[i])}
+    }
+  else{
+    for (i in 1:nrow(z.norm.data)) {RVI.data$AVI[i] <- sumna(unlist(z.norm.data[i,2:(length(resp.range)+1)])*EP)}
+  }
+
+  if(fisherZ==TRUE){
+    RVI.data$RVI.fisherZ <- NA
+    for (i in 1:nrow(z.norm.data)) {RVI.data$RVI.fisherZ[i] <- 0.5*log((1+RVI.data$RVI[i])/(1-RVI.data$RVI[i]))}
+    }
 
   out <- list()
   out$i.norm.resid <- i.norm.data
