@@ -17,7 +17,7 @@
 #'   \item{DS_22q}{the expected pattern of 22q11.2 deletion syndrome (\doi{10.1002/hbm.24998} table 2; \doi{10.1038/s41380-019-0450-0} table S6)}
 #'   \item{PTSD}{the expected pattern of Post-traumatic stress disorder (\doi{10.1002/hbm.24998} table 2)}
 #'   \item{TBI}{the expected pattern of Traumatic brain injury (\doi{10.1002/hbm.24998} table 2)}
-#'   \item{OCD}{the expected pattern of Obsessive-compulsive disorder (\doi{10.1002/hbm.24998} table 2)}
+#'   \item{OCD_pediatric}{the expected pattern of Obsessive-compulsive disorder in pediatric subjects (\doi{10.1038/s41398-021-01276-z} table 4)}
+#'   \item{OCD_adult}{the expected pattern of Obsessive-compulsive disorder in adults (\doi{10.1038/s41398-021-01276-z} table 3)}
 #' }
-#' @source The 'EP.WM' pattern is from Maryland Psychiatric Research Center, Department of Psychiatry, University of Maryland School of Medicine.
 "EP.WM"

@@ -20,10 +20,10 @@ A data frame with 33 rows and 13 variables:
 \item{MET}{the expected pattern of Metabolic diseases (Diabetes, Hypertension and Hyperlipidemia)}
 \item{DS_22q}{the expected pattern of 22q11.2 deletion syndrome (\doi{10.1038/s41380-018-0078-5} table S10a)}
 \item{Suicide}{the expected pattern of suicidal ideation (\doi{10.1101/2021.09.27.21264068} table S8)}
+\item{OCD_pediatric}{the expected pattern of Obsessive-compulsive disorder in pediatric subjects (\doi{10.1176/appi.ajp.2017.17050485} table S6)}
+\item{OCD_adult}{the expected pattern of Obsessive-compulsive disorder in adults (\doi{10.1176/appi.ajp.2017.17050485} table S4)}
+\item{AN}{the expected pattern of Anorexia Nervosa}
 }
-}
-\source{
-The 'EP.GM' pattern is from Maryland Psychiatric Research Center, Department of Psychiatry, University of Maryland School of Medicine.
 }
 \usage{
 EP.GM

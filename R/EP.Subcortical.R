@@ -17,6 +17,8 @@
 #'   \item{MET}{the expected pattern of Metabolic diseases (Diabetes, Hypertension and Hyperlipidemia)}
 #'   \item{DS_22q}{the expected pattern of 22q11.2 deletion syndrome (\doi{10.1176/appi.ajp.2019.19060583} table S14a)}
 #'   \item{Suicide}{the expected pattern of suicidal ideation (\doi{10.1101/2021.09.27.21264068} table S8)}
+#'   \item{OCD_pediatric}{the expected pattern of Obsessive-compulsive disorder in pediatric subjects (\doi{10.1176/appi.ajp.2016.16020201} table S2)}
+#'   \item{OCD_adult}{the expected pattern of Obsessive-compulsive disorder in adults (\doi{10.1176/appi.ajp.2016.16020201} table 3)}
+#'   \item{AN}{the expected pattern of Anorexia Nervosa}
 #' }
-#' @source The 'EP.Subcortical' pattern is from Maryland Psychiatric Research Center, Department of Psychiatry, University of Maryland School of Medicine.
 "EP.Subcortical"
