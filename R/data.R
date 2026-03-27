@@ -9,6 +9,7 @@
 #'   \item{DX}{indicators of control group}
 #'   \item{Age}{subjects' age}
 #'   \item{Sex}{subjects' gehder}
+#'   \item{Site}{subjects' scanning site}
 #'   \item{Lateral.Ventricle}{simulated volumes of lateral Ventricle}
 #'   \item{Thalamus}{simulated volumes of Thalamus}
 #'   \item{Caudate}{simulated volumes of Caudate}

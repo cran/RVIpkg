@@ -1,11 +1,11 @@
 Package: RVIpkg
 Title: Regional Vulnerability Index
-Version: 0.3.3
+Version: 0.3.4
 Authors@R: c(
     person(given = "Si",
            family = "Gao",
            role = c("aut", "cre","dtc"),
-           email = "Si.Gao@uth.tmc.edu",
+           email = c("iamgaosi@yahoo.com","Si.Gao@uth.tmc.edu"),
            comment = "RVIpkg method development, code development, maintenance, data collection"),
     person(given = "Peter",
            family = "Kochunov",
@@ -32,12 +32,12 @@ Description: The Regional Vulnerability Index (RVI), a statistical measure of br
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.2
-Depends: R (>= 2.10)
+RoxygenNote: 7.3.3
+Depends: R (>= 3.5)
 Imports: stats
 NeedsCompilation: no
-Packaged: 2025-03-11 02:29:53 UTC; AbestSG
-Maintainer: Si Gao <Si.Gao@uth.tmc.edu>
+Packaged: 2026-03-27 21:03:14 UTC; x-sgao
+Maintainer: Si Gao <iamgaosi@yahoo.com>
 Author: Si Gao [aut, cre, dtc] (RVIpkg method development, code development,
     maintenance, data collection),
   Peter Kochunov [aut, dtc, cph, fnd] (RVIpkg concept, method
@@ -47,4 +47,4 @@ Author: Si Gao [aut, cre, dtc] (RVIpkg method development, code development,
     collection),
   Fatima Talib [ctb] (RVIpkg testing and method)
 Repository: CRAN
-Date/Publication: 2025-03-11 16:00:02 UTC
+Date/Publication: 2026-03-27 21:30:02 UTC

@@ -22,6 +22,8 @@ A data frame with 24 rows and 14 variables:
 \item{TBI}{the expected pattern of Traumatic brain injury (\doi{10.1002/hbm.24998} table 2)}
 \item{OCD_pediatric}{the expected pattern of Obsessive-compulsive disorder in pediatric subjects (\doi{10.1038/s41398-021-01276-z} table 4)}
 \item{OCD_adult}{the expected pattern of Obsessive-compulsive disorder in adults (\doi{10.1038/s41398-021-01276-z} table 3)}
+\item{SADHC}{the expected pattern of Social Anxiety Disorder}
+\item{ASD}{the expected pattern of of Autism Spectrum Disorder (\doi{10.1038/s41380-019-0553-7} table S26)}
 }
 }
 \usage{

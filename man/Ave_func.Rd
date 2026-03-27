@@ -21,9 +21,8 @@ The Ave_func() can optimize data from UK Biobank(UKB). It will rename field IDs 
 hemispheres of the same field.
 }
 \note{
-The Ave_func() function is developed at the Maryland Psychiatric Research Center, Department of Psychiatry,
-University of Maryland School of Medicine. This project is supported by NIH R01 EB015611 grant. Please cite our funding if
-you use this software.
+The RVI_func() function is developed at the the University of Texas Health Science Center at Houston, Department of Psychiatry and Behavioral Sciences,
+McGovern Medical School. This project is supported by NIH R01 EB015611 grant. Please cite our funding if you use this software.
 }
 \references{
 Kochunov P, Fan F, Ryan MC, et al. Translating ENIGMA schizophrenia findings using the regional vulnerability index: Association

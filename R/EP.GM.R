@@ -20,5 +20,7 @@
 #'   \item{OCD_pediatric}{the expected pattern of Obsessive-compulsive disorder in pediatric subjects (\doi{10.1176/appi.ajp.2017.17050485} table S6)}
 #'   \item{OCD_adult}{the expected pattern of Obsessive-compulsive disorder in adults (\doi{10.1176/appi.ajp.2017.17050485} table S4)}
 #'   \item{AN}{the expected pattern of Anorexia Nervosa}
+#'   \item{ASD}{the expected pattern of Autism Spectrum Disorder (\doi{10.1176/appi.ajp.2017.17010100} table 2)}
+#'   \item{ADHD}{the expected pattern of Attention-Deficit/Hyperactivity Disorder}
 #' }
 "EP.GM"
